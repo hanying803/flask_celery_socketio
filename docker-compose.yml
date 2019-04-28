@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  web:
+    build: .
+    container_name: flask
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/opt/project"
+
+  mq:
+    image: rabbitmq
+    container_name: rabbitmq
+    hostname: rabbitmq

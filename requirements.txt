@@ -1,0 +1,8 @@
+flask
+flask_script
+celery
+psutil
+flask_socketio
+eventlet
+gunicorn
+supervisor
