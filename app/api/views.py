@@ -102,18 +102,18 @@ def background_thread():
                       namespace='/test')  # 注意：这里不需要客户端连接的上下文，默认 broadcast = True ！！！！！！！
 
 
-# @socketio.on('connect', namespace='/test')
-# def test_connect():
-#     global thread
-#     with thread_lock:
-#         if thread is None:
-#             thread = socketio.start_background_task(target=background_thread)
-
 @socketio.on('connect', namespace='/test')
 def test_connect():
-    socketio.emit('my response', {'data': 'Connected'})
-    socketio.emit('my response', {'data': 'Connected'}, namespace='/test')
-
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(target=background_thread)
+#
+# @socketio.on('connect', namespace='/test')
+# def test_connect():
+#     socketio.emit('my response', {'data': 'Connected'})
+#     socketio.emit('my response', {'data': 'Connected'}, namespace='/test')
+#
 
 @socketio.on('message', namespace='/test')
 def handle_message(message):
